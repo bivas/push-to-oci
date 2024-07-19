@@ -33,5 +33,5 @@ runs:
       shell: bash
       id: push-image
       env:
-        ORAS_REGISTRY_USERNAME: ${{ input.REGISTRY_USERNAME }}
-        ORAS_REGISTRY_PASSWORD: ${{ input.REGISTRY_PASSWORD }}
+        ORAS_REGISTRY_USERNAME: ${{ inputs.REGISTRY_USERNAME }}
+        ORAS_REGISTRY_PASSWORD: ${{ inputs.REGISTRY_PASSWORD }}
