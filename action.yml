@@ -1,4 +1,8 @@
 name: "Push path to OCI Registry"
+author: Eliran Bivas
+branding:
+  icon: arrow-up-circle
+  color: blue
 description: "Push a specified path to an OCI registry if a specific path changes"
 inputs:
   path:
