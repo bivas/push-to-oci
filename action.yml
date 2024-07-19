@@ -1,0 +1,31 @@
+name: "Push path to OCI Registry"
+description: "Push a specified path to an OCI registry if a specific path changes"
+inputs:
+  path:
+    description: "The path to push to the OCI registry"
+    required: true
+  image_name:
+    description: "The name of the OCI image"
+    required: true
+outputs:
+  image_full_name:
+    description: "The full name of the OCI image"
+    value: ${{ steps.push-image.outputs.full-image-name }}
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: ${{ inputs.path }}
+
+    - uses: oras-project/setup-oras@v1
+    - run: |
+        IMAGE_NAME="${{ inputs.image_name }}:$(git rev-parse HEAD)"
+        echo "full-image-name=$(echo $IMAGE_NAME)" >> $GITHUB_OUTPUT 
+        oras push ${IMAGE_NAME} ${{ inputs.path }}
+      shell: bash
+      id: push-image
+      env:
+        ORAS_REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        ORAS_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
