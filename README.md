@@ -26,7 +26,7 @@ jobs:
               uses: bivas/push-to-oci-action@v1
               with:
                 path: /path/to/your/folder
-                image_name: registry/repository # Don't include tag infromation, will be added by action
+                image_repository: registry/repository # Don't include tag infromation, will be added by action
                 registry: docker.io
                 registry_username: username
                 registry_password: password
