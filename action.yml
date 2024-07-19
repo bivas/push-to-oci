@@ -7,7 +7,7 @@ inputs:
   image_name:
     description: "The name of the OCI image"
     required: true
-  resistry_username:
+  registry_username:
     description: "The username for the OCI registry"
     required: true
   registry_password:
@@ -33,5 +33,5 @@ runs:
       shell: bash
       id: push-image
       env:
-        ORAS_REGISTRY_USERNAME: ${{ inputs.REGISTRY_USERNAME }}
-        ORAS_REGISTRY_PASSWORD: ${{ inputs.REGISTRY_PASSWORD }}
+        ORAS_REGISTRY_USERNAME: ${{ inputs.registry_username }}
+        ORAS_REGISTRY_PASSWORD: ${{ inputs.registry_password }}
