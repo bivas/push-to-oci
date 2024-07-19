@@ -23,7 +23,7 @@ jobs:
 
         steps:
             - name: Push to OCI Registry
-              uses: bivas/push-to-oci-action@v1
+              uses: bivas/push-to-oci@v0.1.1
               with:
                 path: /path/to/your/folder
                 image_repository: registry/repository # Don't include tag infromation, will be added by action
