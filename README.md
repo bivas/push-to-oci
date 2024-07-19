@@ -27,9 +27,12 @@ jobs:
               with:
                 path: /path/to/your/folder
                 image_name: registry/repository # Don't include tag infromation, will be added by action
+                registry: docker.io
+                registry_username: username
+                registry_password: password
 ```
 
-3. Include information for `$REGISTRY_USERNAME`, and `$REGISTRY_PASSWORD` with your OCI registry details. Make sure to store these secrets securely in your repository's settings.
+3. Include information for `registry_username`, and `registry_password` with your OCI registry details. Make sure to store these secrets securely in your repository's settings.
 
 4. Commit and push the workflow file to your repository.
 

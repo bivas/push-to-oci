@@ -4,8 +4,11 @@ inputs:
   path:
     description: "The path to push to the OCI registry"
     required: true
-  image_name:
-    description: "The name of the OCI image"
+  image_repository:
+    description: "The repository of the OCI image"
+    required: true
+  oci_registry:
+    description: "The OCI registry to push the image to"
     required: true
   registry_username:
     description: "The username for the OCI registry"
@@ -27,11 +30,9 @@ runs:
 
     - uses: oras-project/setup-oras@v1
     - run: |
-        IMAGE_NAME="${{ inputs.image_name }}:$(git rev-parse HEAD)"
+        IMAGE_NAME="${{ inputs.oci_registry}}/${{ inputs.image_name }}:$(git rev-parse HEAD)"
         echo "full-image-name=$(echo $IMAGE_NAME)" >> $GITHUB_OUTPUT
+        oras login --username ${{ inputs.registry_username }} --password ${{ inputs.registry_password }} ${{ inputs.oci_registry }}
         oras push ${IMAGE_NAME} ${{ inputs.path }}
       shell: bash
       id: push-image
-      env:
-        ORAS_REGISTRY_USERNAME: ${{ inputs.registry_username }}
-        ORAS_REGISTRY_PASSWORD: ${{ inputs.registry_password }}
